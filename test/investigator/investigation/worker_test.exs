@@ -17,11 +17,10 @@ defmodule Investigator.Investigation.WorkerTest do
   end
 
   test 'cast put subject', %{id: id} do
-    subject_id = 11
-    subject = %{id: subject_id}
+    subject = %{id: 11}
     Worker.put_subject(id, subject)
 
-    assert Worker.read(id).subjects == %{subject_id => subject}
+    assert Worker.read(id).subjects == %{subject.id => subject}
   end
 
   test 'cast delete subject', %{id: id} do
