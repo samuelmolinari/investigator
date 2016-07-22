@@ -31,6 +31,14 @@ defmodule Investigator.Investigation.Worker do
     cast(id, {:delete_subject, subject})
   end
 
+  def put_intel(id, intel) do
+    cast(id, {:put_intel, intel})
+  end
+
+  def delete_intel(id, intel) do
+    cast(id, {:delete_intel, intel})
+  end
+
   # Server API
 
   def init({:ok, id}) do
@@ -47,6 +55,14 @@ defmodule Investigator.Investigation.Worker do
 
   def handle_cast({:delete_subject, subject}, state) do
     {:noreply, Investigation.delete_subject(state, subject)}
+  end
+
+  def handle_cast({:put_intel, intel}, state) do
+    {:noreply, Investigation.put_intel(state, intel)}
+  end
+
+  def handle_cast({:delete_intel, intel}, state) do
+    {:noreply, Investigation.delete_intel(state, intel)}
   end
 
   def whereis(id) do

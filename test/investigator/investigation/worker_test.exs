@@ -30,4 +30,19 @@ defmodule Investigator.Investigation.WorkerTest do
 
     assert Worker.read(id).subjects == %{}
   end
+
+  test 'cast put intel', %{id: id} do
+    intel = %{id: 11}
+    Worker.put_intel(id, intel)
+
+    assert Worker.read(id).intels == %{intel.id => intel}
+  end
+
+  test 'cast delete intel', %{id: id} do
+    intel = %{id: 11}
+    Worker.put_intel(id, intel)
+    Worker.delete_intel(id, intel)
+
+    assert Worker.read(id).intels == %{}
+  end
 end
